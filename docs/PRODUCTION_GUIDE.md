@@ -41,18 +41,10 @@ The Coralogix Operator is a Kubernetes operator that automates the management of
 
 ## Installation
 
-### Step 1: Add Helm Repository
+### Step 1: Install the Operator
 
 ```bash
-# Add the Coralogix Helm repository
-helm repo add coralogix https://cgx.jfrog.io/artifactory/coralogix-charts-virtual
-helm repo update
-```
-
-### Step 2: Install the Operator
-
-```bash
-helm install coralogix-operator coralogix/coralogix-operator \
+helm install coralogix-operator ./charts/coralogix-operator \
   --namespace coralogix-operator \
   --create-namespace \
   --set secret.data.apiKey="<your-api-key>" \
@@ -72,7 +64,7 @@ helm install coralogix-operator coralogix/coralogix-operator \
 - `ap1` - Asia Pacific
 - `ap2` - Asia Pacific 2
 
-### Step 3: Verify Installation
+### Step 2: Verify Installation
 
 ```bash
 # Check operator pod status
@@ -85,12 +77,12 @@ kubectl logs -n coralogix-operator -l app.kubernetes.io/name=coralogix-operator 
 kubectl get crd | grep coralogix
 ```
 
-### Step 4: Upgrade Existing Installation
+### Step 3: Upgrade Existing Installation
 
 If upgrading from a previous version:
 
 ```bash
-helm upgrade coralogix-operator coralogix/coralogix-operator \
+helm upgrade coralogix-operator ./charts/coralogix-operator \
   --namespace coralogix-operator \
   --set secret.data.apiKey="<your-api-key>" \
   --set coralogixOperator.region="<your-region>" \

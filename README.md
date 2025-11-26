@@ -23,15 +23,9 @@ For production-ready installation and configuration, see the [Production Deploym
 
 Quick start:
 
-1. Add the Coralogix Helm repository and update it:
+1. Install the operator using the local chart:
 ```sh
-helm repo add coralogix https://cgx.jfrog.io/artifactory/coralogix-charts-virtual
-helm repo update
-```
-
-2. Install the operator:
-```sh
-helm install coralogix-operator coralogix/coralogix-operator \
+helm install coralogix-operator ./charts/coralogix-operator \
   --namespace coralogix-operator \
   --create-namespace \
   --set secret.data.apiKey="<api-key>" \
@@ -45,9 +39,9 @@ helm install coralogix-operator coralogix/coralogix-operator \
 
 For a complete list of configuration options, refer to the [Helm Chart Docs](./charts/coralogix-operator/README.md).
 
-3. Upgrade the operator:
+2. Upgrade the operator:
 ```sh  
-helm upgrade coralogix-operator coralogix/coralogix-operator \
+helm upgrade coralogix-operator ./charts/coralogix-operator \
   --namespace coralogix-operator \
   --set secret.data.apiKey="<api-key>" \
   --set coralogixOperator.region="<region>" \
@@ -58,7 +52,7 @@ helm upgrade coralogix-operator coralogix/coralogix-operator \
 
 **Note:** Using `tag: "latest"` with `pullPolicy: "Always"` ensures you always get the latest image. For production, consider using a specific version tag like `"v2.0.3"` for stability.
 
-4. To uninstall the operator, run:
+3. To uninstall the operator, run:
 ```sh
 helm delete coralogix-operator --namespace coralogix-operator
 ```
